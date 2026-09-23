@@ -120,9 +120,9 @@ Dessa forma, o estudante consegue ter uma visão mais clara das suas responsabil
 Projeto desenvolvido por:
 
 **Anthonny**  
-**Galvao**  
+**Galvão**  
 **Vitin**  
-**Kaua**
+**Kauã**
 
 ---
 

@@ -115,21 +115,6 @@ Dessa forma, o estudante consegue ter uma visão mais clara das suas responsabil
 
 ---
 
-## Design
-
-A interface foi desenvolvida com uma proposta:
-
-- Moderna;
-- Simples;
-- Intuitiva;
-- Organizada;
-- Adaptada para estudantes;
-- Responsiva.
-
-O sistema também possui uma experiência visual inspirada em aplicativos para dispositivos móveis.
-
----
-
 ## Desenvolvedores
 
 Projeto desenvolvido por:
@@ -138,12 +123,6 @@ Projeto desenvolvido por:
 **Galvao**  
 **Vitin**  
 **Kaua**
-
----
-
-## Projeto acadêmico
-
-O **Escola Organizada** foi desenvolvido como um projeto escolar com o objetivo de aplicar conhecimentos de tecnologia, desenvolvimento de sistemas, organização de projetos e resolução de problemas reais.
 
 ---
 

@@ -1,58 +1,160 @@
 # Escola Organizada
 
-Aplicação web de produtividade escolar para transformar atividades e projetos em um plano de ação. O primeiro acesso começa sem dados de demonstração: cada atividade, matéria, projeto, etapa e integrante é criado pelo estudante.
+## Sobre o projeto
 
-## Tecnologias
+O **Escola Organizada** é uma plataforma desenvolvida para ajudar estudantes a organizar melhor sua rotina escolar.
 
-- React 19 e TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- Lucide React (ícones)
-- LocalStorage, isolado em uma camada de serviço
+A ideia surgiu a partir de um problema comum entre estudantes: não basta apenas lembrar das atividades. Muitas vezes é difícil saber **qual atividade fazer primeiro, quando começar e quanto tempo dedicar a cada uma**.
 
-## Como executar
+Por isso, o Escola Organizada foi pensado para transformar uma lista de tarefas em um **plano de ação**, ajudando o estudante a visualizar suas responsabilidades e organizar melhor seu tempo.
 
-```bash
-npm install
-npm run dev
-```
+O sistema permite cadastrar atividades, provas, trabalhos e projetos, acompanhar prazos e visualizar quais tarefas precisam de maior atenção.
 
-Para gerar uma versão de produção:
+---
 
-```bash
-npm run build
-npm run preview
-```
+## Objetivo
 
-## Estrutura
+O principal objetivo do Escola Organizada é facilitar a organização dos estudantes e diminuir o acúmulo de atividades.
 
-```text
-src/
-├── components/     # Botões, cards, modal, estados vazios e elementos reutilizáveis
-├── hooks/          # Store e ações do aplicativo
-├── layouts/        # Mockup mobile, navegação e guardas de rota
-├── pages/          # Telas e fluxos da aplicação
-├── services/       # Contrato de armazenamento e implementação LocalStorage
-├── styles/         # Tailwind e estilos globais
-├── types/          # Modelos TypeScript do domínio
-├── utils/          # Prioridade, datas e alertas
-└── main.tsx        # Rotas e ponto de entrada
-```
+A plataforma busca ajudar o estudante a:
 
-## Pontos importantes para alterar
+- Organizar suas atividades escolares;
+- Identificar o que precisa ser feito primeiro;
+- Acompanhar prazos;
+- Dividir projetos em etapas;
+- Acompanhar o progresso das tarefas;
+- Visualizar sua rotina de estudos;
+- Evitar o acúmulo de atividades.
 
-- Os pesos e faixas de prioridade ficam em `src/utils/priority.ts`.
-- A geração de alertas fica em `src/utils/alerts.ts`.
-- Os modelos de atividade, projeto, etapas e configurações ficam em `src/types/index.ts`.
-- A persistência está concentrada em `src/services/storage.ts`; nenhum componente chama `localStorage` diretamente.
-- Os fluxos de criação, edição e exclusão estão em `src/hooks/useAppStore.tsx`.
-- Paleta, fontes, campos e animações ficam em `src/styles/index.css` e `tailwind.config.js`.
+---
 
-## Próximo passo: backend
+## Como funciona
 
-O `StorageService` em `src/services/storage.ts` é o ponto de troca. Para usar Firebase, Supabase ou uma API própria, crie outra classe que implemente `load`, `save` e `clear`, ou amplie o contrato para operações assíncronas por entidade. Mantenha os tipos e as ações da store; assim as páginas não precisam ser reescritas. Em produção, a autenticação simulada deve ser substituída por um provedor seguro — senhas nunca devem ficar no armazenamento do navegador.
+O estudante cadastra suas próprias atividades informando informações como:
 
-## Próximo passo: Android e iOS
+- Nome da atividade;
+- Matéria;
+- Prazo de entrega;
+- Dificuldade;
+- Importância;
+- Tempo estimado.
 
-A lógica de domínio, modelos e serviços são independentes da interface. Para React Native/Expo, reutilize `src/types`, `src/utils` e uma versão da store, trocando apenas `pages`, `components`, `layouts` e o adaptador de armazenamento (por exemplo, AsyncStorage/SecureStore). Também é possível manter este app web e empacotá-lo como aplicativo com Capacitor.
+A partir dessas informações, o sistema calcula uma **prioridade** para ajudar o estudante a identificar quais atividades merecem atenção primeiro.
+
+Os projetos também podem ser divididos em diferentes etapas, permitindo acompanhar o progresso até a conclusão.
+
+---
+
+## Principais funcionalidades
+
+### Atividades
+
+Permite cadastrar, editar e acompanhar atividades escolares.
+
+### Sistema de prioridade
+
+Analisa informações como prazo, dificuldade, importância e tempo estimado para indicar o nível de prioridade de cada atividade.
+
+### Calendário
+
+Permite visualizar atividades, provas, trabalhos e outros compromissos escolares de acordo com suas datas.
+
+### Projetos
+
+Possibilita criar projetos e dividir cada um deles em etapas menores.
+
+### Acompanhamento de progresso
+
+Permite acompanhar o andamento das atividades e projetos.
+
+### Alertas
+
+O sistema identifica situações em que várias atividades estão próximas do prazo e ajuda o estudante a perceber possíveis acúmulos.
+
+### Estatísticas
+
+Apresenta informações sobre as atividades concluídas, pendentes e o progresso dos projetos.
+
+---
+
+## Para quem é o projeto?
+
+O Escola Organizada foi desenvolvido principalmente para:
+
+- Estudantes do Ensino Fundamental;
+- Estudantes do Ensino Médio;
+- Estudantes do Ensino Técnico.
+
+A plataforma foi pensada especialmente para estudantes que possuem várias atividades, provas, trabalhos e projetos para organizar durante o período escolar.
+
+---
+
+## Tecnologias utilizadas
+
+O projeto foi desenvolvido utilizando:
+
+- **React**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **React Router**
+- **Lucide React**
+- **LocalStorage**
+
+---
+
+## Diferencial do projeto
+
+O Escola Organizada não foi pensado apenas como uma agenda ou uma lista de tarefas.
+
+Seu principal diferencial é transformar as atividades cadastradas pelo estudante em uma organização baseada em **prioridade**, ajudando a responder uma das principais dúvidas durante a rotina escolar:
+
+> **"O que eu devo fazer primeiro?"**
+
+Dessa forma, o estudante consegue ter uma visão mais clara das suas responsabilidades e organizar melhor seu tempo.
+
+---
+
+## Design
+
+A interface foi desenvolvida com uma proposta:
+
+- Moderna;
+- Simples;
+- Intuitiva;
+- Organizada;
+- Adaptada para estudantes;
+- Responsiva.
+
+O sistema também possui uma experiência visual inspirada em aplicativos para dispositivos móveis.
+
+---
+
+## Desenvolvedores
+
+Projeto desenvolvido por:
+
+**Anthonny**  
+**Galvao**  
+**Vitin**  
+**Kaua**
+
+---
+
+## Projeto acadêmico
+
+O **Escola Organizada** foi desenvolvido como um projeto escolar com o objetivo de aplicar conhecimentos de tecnologia, desenvolvimento de sistemas, organização de projetos e resolução de problemas reais.
+
+---
+
+## Status do projeto
+
+**Em desenvolvimento.**
+
+Novas funcionalidades e melhorias poderão ser adicionadas ao projeto durante seu desenvolvimento.
+
+---
+
+# Escola Organizada
+
+**Organize suas atividades. Priorize suas tarefas. Conclua seus projetos.**

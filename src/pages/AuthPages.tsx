@@ -1,0 +1,23 @@
+import { Eye, EyeOff, ListChecks } from 'lucide-react'
+import { FormEvent, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '../components/Button'
+import { useAppStore } from '../hooks/useAppStore'
+
+function AuthFrame({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
+  return <div className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-sm flex-col justify-center py-6 animate-fade-in"><Link to="/boas-vindas" className="mb-8 flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-lg shadow-brand-200"><ListChecks size={22} /></Link><h1 className="text-2xl font-extrabold tracking-tight text-slate-900">{title}</h1><p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>{children}</div>
+}
+function PasswordInput({ value, onChange, label = 'Senha', autoComplete }: { value: string; onChange: (value: string) => void; label?: string; autoComplete?: string }) {
+  const [visible, setVisible] = useState(false)
+  return <label className="block"><span className="field-label">{label}</span><span className="relative block"><input required minLength={6} autoComplete={autoComplete} type={visible ? 'text' : 'password'} value={value} onChange={(event) => onChange(event.target.value)} className="field-input pr-11" /><button type="button" aria-label={visible ? 'Ocultar senha' : 'Mostrar senha'} onClick={() => setVisible(!visible)} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-400 hover:bg-slate-100">{visible ? <EyeOff size={18} /> : <Eye size={18} />}</button></span></label>
+}
+export function LoginPage() {
+  const { login } = useAppStore(); const navigate = useNavigate(); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState('')
+  function submit(event: FormEvent) { event.preventDefault(); const result = login(email, password); if (result.ok) navigate('/'); else setError(result.error ?? 'Não foi possível entrar.') }
+  return <AuthFrame title="Que bom ter você de volta." description="Entre para continuar organizando seu plano de estudos."><form onSubmit={submit} className="mt-8 space-y-4"><label className="block"><span className="field-label">E-mail</span><input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="field-input" /></label><PasswordInput value={password} onChange={setPassword} autoComplete="current-password" />{error && <p role="alert" className="rounded-xl bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700">{error}</p>}<Button type="submit" className="mt-2 w-full">Entrar</Button></form><p className="mt-6 text-center text-sm text-slate-500">Ainda não tem conta? <Link to="/cadastro" className="font-bold text-brand-700">Criar conta</Link></p></AuthFrame>
+}
+export function RegisterPage() {
+  const { register } = useAppStore(); const navigate = useNavigate(); const [name, setName] = useState(''); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [confirmation, setConfirmation] = useState(''); const [error, setError] = useState('')
+  function submit(event: FormEvent) { event.preventDefault(); if (!name.trim()) return setError('Informe seu nome.'); if (password !== confirmation) return setError('As senhas não coincidem.'); const result = register({ name, email, password }); if (result.ok) navigate('/'); else setError(result.error ?? 'Não foi possível criar a conta.') }
+  return <AuthFrame title="Seu espaço começa aqui." description="Crie sua conta e construa uma organização que funciona para você."><form onSubmit={submit} className="mt-7 space-y-4"><label className="block"><span className="field-label">Nome</span><input required autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} className="field-input" /></label><label className="block"><span className="field-label">E-mail</span><input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="field-input" /></label><PasswordInput value={password} onChange={setPassword} autoComplete="new-password" /><PasswordInput label="Confirme sua senha" value={confirmation} onChange={setConfirmation} autoComplete="new-password" />{error && <p role="alert" className="rounded-xl bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700">{error}</p>}<Button type="submit" className="w-full">Criar conta</Button></form><p className="mt-6 text-center text-sm text-slate-500">Já possui uma conta? <Link to="/login" className="font-bold text-brand-700">Entrar</Link></p></AuthFrame>
+}

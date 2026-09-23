@@ -1,0 +1,12 @@
+import { FolderKanban, Plus, Users } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '../components/Button'
+import { EmptyState } from '../components/EmptyState'
+import { PageHeader } from '../components/PageHeader'
+import { useAppStore } from '../hooks/useAppStore'
+import { formatDate } from '../utils/date'
+
+export function ProjectsPage() {
+  const { projects } = useAppStore(); const navigate = useNavigate()
+  return <div className="animate-fade-in"><PageHeader title="Projetos" subtitle={projects.length ? `${projects.length} projeto${projects.length !== 1 ? 's' : ''} no seu espaço` : 'Transforme trabalhos grandes em etapas.'} action={<button aria-label="Novo projeto" onClick={() => navigate('/projetos/novo')} className="rounded-xl bg-brand-600 p-2.5 text-white shadow-sm"><Plus size={19} /></button>} />{!projects.length ? <EmptyState icon={FolderKanban} title="Você ainda não possui projetos." description="Crie um projeto e divida o trabalho em etapas que cabem na sua rotina." actionLabel="Novo projeto" onAction={() => navigate('/projetos/novo')} /> : <div className="space-y-3">{[...projects].sort((a,b) => a.dueDate.localeCompare(b.dueDate)).map((project) => { const total = project.steps.length; const completed = project.steps.filter((step) => step.completed).length; const progress = total ? Math.round(completed / total * 100) : 0; return <Link key={project.id} to={`/projetos/${project.id}`} className="block rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate text-sm font-bold text-slate-800">{project.name}</p><p className="mt-1 truncate text-xs text-slate-500">{project.subject || 'Sem matéria'} · prazo {formatDate(project.dueDate)}</p></div><span className="shrink-0 text-base font-extrabold text-brand-700">{progress}%</span></div><div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-100"><div className="h-full rounded-full bg-brand-600 transition-all" style={{ width: `${progress}%` }} /></div><div className="mt-3 flex items-center justify-between text-xs text-slate-500"><span>{total ? `${completed} de ${total} etapas` : 'Nenhuma etapa criada'}</span>{project.members.length > 0 && <span className="flex items-center gap-1"><Users size={13} />{project.members.length}</span>}</div></Link>})}</div>}</div>
+}
